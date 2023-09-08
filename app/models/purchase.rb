@@ -1,6 +1,6 @@
 class Purchase < ApplicationRecord
-  belongs_to :products
-  belongs_to :users         #Buyer_type_user
+  belongs_to :product
+  belongs_to :user       #Buyer_type_user
   validate :buyer_purchase_product
   private
   def buyer_purchase_product

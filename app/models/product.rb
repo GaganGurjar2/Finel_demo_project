@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
-  belongs_to :users         #Seller_type_user
-  has_many :purchase       #Buyer_type_user
+  belongs_to :user         #Seller_type_user
+  has_many :purchases       #Buyer_type_user
   validate :seller_add_product
   private
   def seller_add_product

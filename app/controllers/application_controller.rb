@@ -1,9 +1,7 @@
-class ApplicationController < ActionController::API
+class ApplicationController < ActionController::Base
   include JsonWebToken
-
  #................Authentication request............
   before_action :authenticate_request
-  
  #...................Authenticate User..................
   def authenticate_request
     begin
@@ -16,14 +14,5 @@ class ApplicationController < ActionController::API
     end
     rescue ActiveRecord::RecordNotFound
     render json: "No record found.."
-  end
-  
-    # ..............Check user.....................
- def current_user
-  @current_user
- end
-    
- def render_404
-  render json: { error: "Invalid URL" }, status: :not_found
- end
+  end 
 end
