@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def index
     render json: @current_user
     # users =User.all
-		# render json:users
+    # render json:users
   end
 
   def create

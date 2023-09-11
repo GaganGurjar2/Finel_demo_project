@@ -1,21 +1,29 @@
-class PurchasesController < ApplicationController
+class PurchasesController < ApplicationController 
   
   def index
     if buyer
-      purchase = @current_user.purchases
-      if purchase.present?
-        render json: purchase
+      # purchases = @current_user.purchases.includes(:product)
+      purchases = @current_user.purchases
+      if purchases.present?
+        render json: purchases, each_serializer: PurchaseSerializer
       else
         render json: { message: "No product exists" }
       end
-    end      
+    end
   end
-
+  
+  def show
+    if buyer
+      purchase = Purchase.find_by(id: params[:id])
+      render json: purchase, serializer: PurchaseSerializer
+    end
+  end
+  
   def create
     if buyer
       purchase= Purchase.new(purchase_params)
       if purchase.save
-        render json: { message: "Purchase Product", data: product }
+        render json: { message: "Purchase Product", data: purchase }
       else
         render json: { errors: purchase.errors.full_messages }, status: :unprocessable_entity
       end
@@ -23,14 +31,6 @@ class PurchasesController < ApplicationController
       render json: { message: "Only Buyer Type User Purchase Product " }, status: :unauthorized
     end
   end 
-  
-  def show
-    if buyer
-      purchase= Purchase.find_by(id: params[:id])
-      render json: purchase
-    end    
-  end  
-
 
   private       
   def purchase_params

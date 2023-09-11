@@ -95,11 +95,12 @@ class ProductsController < ApplicationController
       end
     else 
       render json: { message: 'No Only buyer type user can see...' }  
-  end
+    end
+  end  
 
   private       
   def product_params
-    params.require(:product).permit(:name,:category,:price,:user_id)
+    params.permit(:name,:category,:price,:user_id,:image)
   end
 
   def seller
