@@ -2,7 +2,6 @@ class PurchasesController < ApplicationController
   
   def index
     if buyer
-      # purchases = @current_user.purchases.includes(:product)
       purchases = @current_user.purchases
       if purchases.present?
         render json: purchases, each_serializer: PurchaseSerializer
@@ -34,7 +33,7 @@ class PurchasesController < ApplicationController
 
   private       
   def purchase_params
-    params.require(:purchase).permit(:product_id,:user_id)
+    params.permit(:product_id,:user_id)
   end
 
   def buyer

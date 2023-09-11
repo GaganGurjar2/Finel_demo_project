@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate_request, only: [:create, :user_login]
-  # ..................Create New user......................
+  
   def index
-    render json: @current_user
+     render json: @current_user
     # users =User.all
     # render json:users
   end
 
+# ..................Create New user......................
   def create
     user = User.new(user_params)
     if user.save
@@ -48,6 +49,6 @@ class UsersController < ApplicationController
   end
   private
   def user_params
-    params.require(:user).permit(:user_name,:email,:password, :user_type)
+    params.permit(:user_name,:email,:password, :user_type)
   end
 end
