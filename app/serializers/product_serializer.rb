@@ -4,3 +4,4 @@ class ProductSerializer < ActiveModel::Serializer
     object.image.url
   end
 end
+ 
